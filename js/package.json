@@ -1,0 +1,58 @@
+{
+  "code":0,
+  "status":200,
+  "result":{
+    "song":[
+      {
+        "music_name":"望",
+        "music_writer":"张碧晨/赵丽颖",
+        "misic_id":1101
+      },
+      {
+        "music_name":"多想做你的爱人",
+        "music_writer":"望海高歌",
+        "misic_id":1102
+      },
+      {
+        "music_name":"偏爱",
+        "music_writer":"张芸京",
+        "misic_id":1103
+      },
+      {
+        "music_name":"爱情转移",
+        "music_writer":"陈奕迅",
+        "misic_id":1104
+      }
+    ],
+    "musicWriter":[
+      {
+      "singer":"引海高歌"
+    }
+    ],
+    "cd_song":[
+      {
+        "music_name":"想你只能在心里",
+        "music_writer":"望海高歌",
+        "misic_id":1103
+      },
+
+      {
+        "music_name":"望",
+        "music_writer":"尤起胜",
+        "misic_id":1104
+      }
+    ],
+    "mv_music":[
+      {
+        "mv_name":"望",
+        "mv_writer":"（楚乔传片尾曲）"
+      },
+      {
+        "mv_name":"多想做你的爱人",
+        "mv_singer":"（KTV版）"
+      }
+    ]
+
+  }
+
+}

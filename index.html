@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QQ音乐，音乐你的生活</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-resource.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/index.js"></script>
+    <!--插件的引用-->
+        <script src="js/slide.js"></script>
+        <script src="js/jquery.zySlide.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <div class="header">
+               <div class="fl">
+                   <img src="img/logo.png" alt="">
+               </div>
+                <div class="fr">
+                    <ul class="nav">
+                        <li class="on">音乐馆</li>
+                        <li>我的音乐</li>
+                        <li>客户端下载</li>
+                        <li class="text">VIP</li>
+                    </ul>
+                    <div id="app">
+                        <div class="fr_search">
+                            <div class="input_wrap">
+                                <input type="text" class="search" id="search" value="金曲捞" @blur="deflag = false" @keyup="deflag = true" v-model="searInfo" v-on:keydown="getData()">
+                                <span class="public_cons"><i class="fa fa-search" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="showSlide" v-bind:class="{'slide_info':deflag}">
+                                <ul class="slide_wrap">
+                                    <li>
+                                        <div class="top"><span><i class="fa fa-music" aria-hidden="true"></i></span><span class="tl">
+                                       单曲 </span></div>
+                                        <div class="bottom">
+                                            <p v-for="item in musicName">{{item.music_name}}
+                                                <span>{{item.music_writer}}</span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="top"><span><i class="fa fa-user-o" aria-hidden="true"></i></span><span class="tl">歌手</span></div>
+                                        <div class="bottom">
+                                            <p v-for="singers in singer">{{singers.singer}}
+                                            </p>
+
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="top"><span><i class="fa fa-podcast" aria-hidden="true"></i></span><span class="tl">专辑</span></div>
+                                        <div class="bottom">
+                                            <p v-for="cds in cdsong">{{cds.music_name}}
+                                                <span>{{cds.music_writer}}</span>
+                                            </p>
+
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="top"><span><i class="fa fa-television" aria-hidden="true"></i></span><span class="tl">MV</span></div>
+                                        <div class="bottom">
+                                            <p v-for="mvMusic in mv">{{mvMusic.mv_name}}
+                                                <span>{{mvMusic.mv_singer}}</span>
+                                            </p>
+
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fr_login">
+                        <span class="login text">登陆</span>
+                        <span class="vip">开通绿钻豪华版</span>
+                        <span class="pay">开通付费包</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="navList">
+            <ul>
+                <li class="text">首页</li>
+                <li class="text">歌手</li>
+                <li class="text">专辑</li>
+                <li class="text">排行榜</li>
+                <li class="text">分类歌单</li>
+                <li class="text">MV</li>
+            </ul>
+        </div>
+        <div class="first_content">
+            <div class="main_top">
+                <h1 class="title">新歌首发</h1>
+                <ul class="Category_wrap">
+                    <li class="categories active">内地</li>
+                    <li class="categories">港台</li>
+                    <li class="categories">欧美</li>
+                    <li class="categories">韩国</li>
+                    <li class="categories">日本</li>
+                    <span><li class="text">全部》</li></span>
+                </ul>
+            </div>
+
+              <div class="prev">
+                  <div class="prev_click ctr_s" ><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+              </div>
+
+
+
+
+            <div class="main_banner" >
+                <ul style="right: 0;">
+                    <li>
+                        <div class="img_wrap" >
+                            <img src="img/img1.jpg" alt="">
+                        </div>
+
+                    <div class="caption">
+                        <div class="title">金曲捞 第8期</div>
+                        <div class="singer">金曲捞</div>
+                    </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img2.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img3.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img4.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img5.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img6.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img7.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img8.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img9.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img10.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img11.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img12.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img13.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img14.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img15.jpg" alt="">
+                            </div>
+                        <div class="caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                        <img src="img/img16.jpg" alt="">
+                            </div>
+                        <div class="caption captionShow">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="next">
+                <div class="next_click ctr_s"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+            </div>
+            <div class="ctr">
+                <a href="" class="show"></a>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+            </div>
+
+        </div>
+        <div class="second_content">
+            <div class="title_top">
+                <h1>精彩推荐</h1>
+                <div class="hr"></div>
+            </div>
+            <div class="prevs">
+                <div class="prevs_click " ><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+            </div>
+            <div class="main_img zy-Slides" id="Slide1 ">
+                    <ul >
+                        <li ><img src="img/cursor1.jpg"  alt="" ></li>
+                        <li ><img src="img/cursor2.jpg"  alt=""></li>
+                        <li><img src="img/cursor3.jpg"   alt="" ></li>
+                        <li><img src="img/cursor4.jpg"   alt="" ></li>
+                        <li><img src="img/cursor5.jpg"   alt="" ></li>
+                        <li><img src="img/cursor6.jpg"   alt="" ></li>
+                        <li ><img src="img/cursor2.jpg"  alt=""></li>
+                    </ul>
+            </div>
+
+            <div class="nexts">
+                <div class="nexts_click "><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+            </div>
+            <div class="ctrs">
+                <a href="" class="show"></a>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+            </div>
+
+        </div>
+        <div class="Third_content">
+            <div class="header">
+                <h1>排行榜</h1>
+                <span>全部》</span>
+            </div>
+            <div class="main">
+                <ul>
+                    <li>
+                        <i class="mask"></i>
+                        <div class="big_bg scale"></div>
+                        <div class="headline">
+                            <i>巅峰榜</i>
+                            <div class="big_title">流行指数</div>
+                        </div>
+                        <ul class="topList">
+                            <li>1 心之焰
+                            <p>G.E.M邓紫棋</p>
+                            </li>
+                            <li>2 我
+                                <p>张靓颖</p>
+                            </li>
+                            <li>3 齐天
+                                <p>华晨宇</p>
+                            </li>
+                            <li>4 曾经守候
+                                <p>张碧晨</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <i class="mask"></i>
+                        <div class="big_bg2 scale"></div>
+                        <div class="headline">
+                            <i>巅峰榜</i>
+                            <div class="big_title">热歌</div>
+                        </div>
+                        <ul class="topList">
+                            <li>1 忘
+                                <p>张碧晨/赵丽颖</p>
+                            </li>
+                            <li>2 嗯
+                                <p>李荣浩</p>
+                            </li>
+                            <li>3 凉凉
+                                <p>杨宗纬/张碧晨</p>
+                            </li>
+                            <li>4 桃花诺
+                                <p>G.E.M邓紫棋</p>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <div class="big_bg3 scale"></div>
+                        <i class="mask"></i>
+                        <div class="headline">
+                            <i>巅峰榜</i>
+                            <div class="big_title">新歌</div>
+                        </div>
+                        <ul class="topList">
+                            <li>1 心之焰
+                                <p>G.E.M邓紫棋</p>
+                            </li>
+                            <li>2 我
+                                <p>张靓颖</p>
+                            </li>
+                            <li>3 齐天
+                                <p>华晨宇</p>
+                            </li>
+                            <li>4 那个男孩
+                                <p>汪苏泷</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="big_bg4 scale"></div>
+                        <i class="mask"></i>
+                        <div class="headline">
+                            <i>巅峰榜</i>
+                            <div class="big_title">欧美</div>
+                        </div>
+                        <ul class="topList">
+                            <li>1 There For You
+                                <p>Martin Garrix/Troye Sivan</p>
+                            </li>
+                            <li>2 Cut To The Felling
+                                <p>Carly Rae Jepsen</p>
+                            </li>
+                            <li>3 Tired
+                                <p>Alan Walker/Gavin James</p>
+                            </li>
+                            <li>4 Good Life
+                                <p>G-Eazy/Kehlani</p>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="four_content">
+            <div class="title_top">
+                <h1>热门歌单</h1>
+                <div class="hr"></div>
+            </div>
+            <div class="prev  four_prev">
+                <div class="prev_click four_ctr four_ctr_prev" ><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+            </div>
+
+            <div class="four_main_banner" >
+                <ul style="right: 0;">
+                    <li>
+                        <div class="img_wrap" >
+                            <img src="img/300.jpg" alt="">
+                        </div>
+
+                        <div class="four_caption">
+                            <div class="title">来一场梦境小城的神秘旅行</div>
+                            <div class="singer">播放量：4.0万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/301.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">【零点夜话】可以卸掉面具的歌</div>
+                            <div class="singer">播放量：5.2万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/302.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">一阵清风，沐浴在这奇妙的律动下</div>
+                            <div class="singer">播放量：4.3万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/303.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">金曲捞 第8期</div>
+                            <div class="singer">金曲捞</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/304.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title"> Acoustic不插电合集 | 听最原始的纯粹</div>
+                            <div class="singer">播放量：312.2万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/305.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">燃起音乐荷尔蒙：劲爆韩曲使你活力四射！</div>
+                            <div class="singer">播放量：21万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/306.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">吉他入门50曲，学会就去撩妹</div>
+                            <div class="singer">播放量：123万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/307.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">来一场梦境小城的神秘旅行</div>
+                            <div class="singer">播放量：87万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/308.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">150首同名不同曲的韩语歌曲</div>
+                            <div class="singer">播放量：45万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/309.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">让世界不再沉闷，百首最强EDM合集</div>
+                            <div class="singer">播放量：98万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/310.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">150首同名不同曲的韩语歌曲</div>
+                            <div class="singer">播放量：391.2万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/311.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">高考加油:进考场前聆听，燃起你笔尖的力量</div>
+                            <div class="singer">播放量：12万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/312.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">与爱情无关的民谣歌曲</div>
+                            <div class="singer">播放量：123万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/313.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">【零点乐话】可以卸掉面具的歌</div>
+                            <div class="singer">播放量：52万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/314.jpg" alt="">
+                        </div>
+                        <div class="four_caption">
+                            <div class="title">冷门华语精选：歌荒的你有好歌听啦！</div>
+                            <div class="singer">播放量：32万</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img_wrap">
+                            <img src="img/315.jpg" alt="">
+                        </div>
+                        <div class="four_caption ">
+                            <div class="title">「阴郁病巢」乙醚字符｜怪僻独声</div>
+                            <div class="singer">播放量：5.1万</div>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="next four_next">
+                <div class="next_click four_ctr four_ctr_next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+            </div>
+            <div class="index_ctrs">
+                <a href="" class="show"></a>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+            </div>
+        </div>
+        <div class="five_content">
+            <div class="main_top">
+                <h1 class="title">MV首播</h1>
+                <ul class="Category_wrap">
+                    <li class="categories five_active">内地</li>
+                    <li class="categories">港台</li>
+                    <li class="categories">欧美</li>
+                    <li class="categories">韩国</li>
+                    <li class="categories">日本</li>
+                    <span><li class="text">全部》</li></span>
+                </ul>
+            </div>
+            <div class="contents_wrap">
+                <div class="content_one">
+                    <div class="content_img">
+                        <div class="four_img_wrap">
+                            <img src="img/four_1.jpg" alt="">
+                        </div>
+
+                        <div class="text_wrap">
+                            <a href="" class="mv_title">曾经守候（影视版）（《明。</a>
+                           <a href="" class="mv_writer">张碧晨</a>
+                            <span><i class="look"></i><span class="lookNum">2.1万</span></span>
+                        </div>
+                    </div>
+                    <div  class="content_img">
+                        <div class="four_img_wrap">
+                            <img src="img/four_2.jpg" alt="">
+                        </div>
+
+                        <div class="text_wrap">
+                            <p><a href="" class="mv_title">桃花乐（《上古情歌》）</a></p>
+                            <p><a href="" class="mv_writer">张碧晨</a></p>
+                            <span><i class="look"></i><span class="lookNum">15.3万</span></span>
+                        </div>
+                    </div>
+                    <div class="content_img">
+                        <div class="four_img_wrap">
+                            <img src="img/four_3.jpg" alt="">
+                        </div>
+
+                        <div class="text_wrap">
+                            <p><a href="" class="mv_title">Why Don't You Know</a></p>
+                            <p><a href="" class="mv_writer">张碧晨</a></p>
+                            <span><i class="look"></i><span class="lookNum">3823</span></span>
+                        </div>
+                    </div>
+                    <div class="content_img">
+                        <div class="four_img_wrap">
+                            <img src="img/four_4.jpg" alt="">
+                        </div>
+
+                        <div class="text_wrap">
+                            <p><a href="" class="mv_title">最后一次</a></p>
+                            <p><a href="" class="mv_writer">庄心妍</a></p>
+                            <span><i class="look"></i><span class="lookNum">1.1万</span></span>
+                        </div>
+                    </div>
+                    <div class="content_img">
+                        <div class="four_img_wrap">
+                            <img src="img/four_5.jpg" alt="">
+                        </div>
+
+                        <div class="text_wrap">
+                            <a href="" class="mv_title">屋檐下的浪漫</a>
+                            <a href="" class="mv_writer">庄心妍</a>
+                            <span><i class="look"></i><span class="lookNum">21.5万</span></span>
+                        </div>
+                    </div>
+                    <div  class="content_img">
+                        <div class="four_img_wrap">
+                            <img src="img/four_6.jpg" alt="">
+                        </div>
+
+                        <div class="text_wrap">
+                            <p><a href="" class="mv_title">齐天悟空传（电影主题曲）</a></p>
+                            <p><a href="" class="mv_writer">华晨宇</a></p>
+                            <span><i class="look"></i><span class="lookNum">27.5万</span></span>
+                        </div>
+                    </div>
+                    <div class="content_img">
+                        <div class="four_img_wrap">
+                            <img src="img/four_7.jpg" alt="">
+                        </div>
+
+                        <div class="text_wrap">
+                            <p><a href="" class="mv_title">《与音乐》第九集，坡上村乐队</a></p>
+                            <p><a href="" class="mv_writer">坡上村</a></p>
+                            <span><i class="look"></i><span class="lookNum">49</span></span>
+                        </div>
+                    </div>
+                    <div class="content_img">
+                        <div class="four_img_wrap">
+                            <img src="img/four_8.jpg" alt="">
+                        </div>
+
+                        <div class="text_wrap">
+                            <p><a href="" class="mv_title">Butterfly</a></p>
+                            <p><a href="" class="mv_writer">램씨</a></p>
+                            <span><i class="look"></i><span class="lookNum">34</span></span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+</body>
+<script>
+    $(".four_main_banner ul li:even").css({
+        "background":"#666"
+    })
+    $(".main_img").zySlide()
+    $(".main_banner").slide()
+    $(".four_main_banner").slide({
+        "selector":".four_ctr",
+        "event":"click",
+        "lisWidth":".four_main_banner ul li",
+        "className":"prev_click",
+        "active":"show",
+        "ctr":".index_ctrs a",
+        "mainSlide":".four_main_banner ul",
+        "mainLis":".four_main_banner ul li",
+        "fr_className":"next_click",
+        "scale":"focus",
+        captionShow:"captionShow",
+        "caption":".four_caption",
+        "main_Img":".four_main_banner ul li img"
+    })
+    $(".main").slide({
+        "lisWidth":".main ul li",
+        "scale":"focus",
+        "main_Img":".scale"
+    })
+    $(".content_one").slide({
+        "lisWidth":".content_img",
+        "scale":"focus",
+        "main_Img":".four_img_wrap img"
+
+    })
+    new Vue({
+        el:"#app",
+        data:{
+            "deflag":false,
+            "musicName":[],
+            "cdsong":[],
+            "singer":[],
+            "mv":[],
+            "searInfo":""
+        },
+        filters:{
+            conditions:function(items){
+                var _this = this;
+                console.log(_this.searInfo)
+            }
+
+        },
+        methods:{
+            getData:function(){
+                var _this = this;
+                var a = this.$http.get("js/package.json").then(function(res){
+                    console.log(res)
+                    _this.musicName = res.body.result.song;
+                    _this.cdsong = res.body.result.cd_song;
+                    _this.singer = res.body.result.musicWriter;
+                    _this.mv = res.body.result.mv_music;
+                })
+            },
+            showInfo:function(){
+
+            }
+        }
+    })
+//    $(".search").on("keydown",function(){
+//        $.ajax({
+//            type:"get",
+//            dataType:"jsonp",
+//            url:"https://c.y.qq.com/splcloud/fcgi-bin/smartbox_new.fcg?",
+//            data:{
+//                "is_xml":0,
+//                "format":"jsonp",
+//                "gtk":"5381",
+//                "jsonpCallback":"SmartboxKeysCallbackmod_top_search3578",
+//                "key":$(".search").val(),
+//                "loginUin":0,
+//                "hostUin":0,
+//                "inCharset":"utf8",
+//                "outCharset":"utf-8",
+//                "notice":"0",
+//                "platform":"yqq",
+//                "needNewCode":0
+//            }
+//        })
+//    })
+</script>
+</html>
